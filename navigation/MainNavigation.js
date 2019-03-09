@@ -11,10 +11,15 @@ const MainNavigation = createStackNavigator(
     },
     Detail: {
       screen: DetailScreen,
-      navigationOptions: { ...headerStyles },
+      navigationOptions: {
+        ...headerStyles,
+      },
     },
   },
-  {},
+  {
+    headerMode: 'screen',
+    headerBackTitleVisible: false,
+  },
 )
 
 export default createAppContainer(MainNavigation)

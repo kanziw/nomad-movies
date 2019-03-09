@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons'
 import { AppLoading, Asset, Font } from 'expo'
 import React from 'react'
+import { StatusBar } from 'react-native'
 import kanziw from './assets/kanziw.png'
 import MainNavigation from './navigation/MainNavigation'
 
@@ -17,7 +18,12 @@ export default class App extends React.Component {
   }
 
   render = () => this.state.loaded
-    ? <MainNavigation />
+    ? (
+      <>
+        <StatusBar barStyle='light-content' />
+        <MainNavigation />
+      </>
+    )
     : (
       <AppLoading
         startAsync={this.loadAssets}
