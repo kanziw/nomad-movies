@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons'
 import { AppLoading, Asset, Font } from 'expo'
-import TabNavigation from './navigation/TabNavigation'
 import React from 'react'
 import kanziw from './assets/kanziw.png'
+import MainNavigation from './navigation/MainNavigation'
 
 export default class App extends React.Component {
   state = { loaded: false }
@@ -17,7 +17,7 @@ export default class App extends React.Component {
   }
 
   render = () => this.state.loaded
-    ? <TabNavigation />
+    ? <MainNavigation />
     : (
       <AppLoading
         startAsync={this.loadAssets}
