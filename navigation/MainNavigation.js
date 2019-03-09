@@ -1,4 +1,5 @@
 import { createAppContainer, createStackNavigator } from 'react-navigation'
+import { headerStyles } from '../navigation/config'
 import DetailScreen from '../screens/Detail'
 import TabNavigation from './TabNavigation'
 
@@ -8,7 +9,10 @@ const MainNavigation = createStackNavigator(
       screen: TabNavigation,
       navigationOptions: { header: null },
     },
-    Detail: DetailScreen,
+    Detail: {
+      screen: DetailScreen,
+      navigationOptions: { ...headerStyles },
+    },
   },
   {},
 )
