@@ -1,0 +1,10 @@
+{
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 30054,
+  "expoServerNgrokUrl": "https://8y-tns.kanziw.nomad-movies.exp.direct",
+  "packagerNgrokUrl": "https://packager.8y-tns.kanziw.nomad-movies.exp.direct",
+  "ngrokPid": 30071,
+  "webpackServerPort": null
+}
