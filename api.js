@@ -32,3 +32,5 @@ export const tv = {
       },
     }),
 }
+
+export const getResults = ({ data: { results } }) => results

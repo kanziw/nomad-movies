@@ -1,8 +1,6 @@
 import React from 'react'
-import { movies } from '../../api'
+import { getResults, movies } from '../../api'
 import MoviesPresenter from './MoviesPresenter'
-
-const getResults = ({ data: { results } }) => results
 
 export default class MoviesContainer extends React.Component {
   state = {
