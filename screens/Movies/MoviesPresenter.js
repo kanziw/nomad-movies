@@ -1,11 +1,17 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Text } from 'react-native'
+import styled from 'styled-components'
 import Loader from '../../components/Loader'
+import MovieSlider from '../../components/MovieSlider'
+import { BG_COLOR } from '../../constants/Color'
 
-const MoviesPresenter = ({ loading }) => loading
+const Container = styled.ScrollView`
+  background-color: ${BG_COLOR};
+`
+
+const MoviesPresenter = ({ loading, nowPlaying }) => loading
   ? <Loader />
-  : <Text>Movies</Text>
+  : <Container><MovieSlider movies={nowPlaying} /></Container>
 
 MoviesPresenter.propTypes = {
   loading: PropTypes.bool.isRequired,
