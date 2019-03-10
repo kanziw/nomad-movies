@@ -9,6 +9,9 @@ const MoviesPresenter = ({ loading }) => loading
 
 MoviesPresenter.propTypes = {
   loading: PropTypes.bool.isRequired,
+  upcoming: PropTypes.array,
+  popular: PropTypes.array,
+  nowPlaying: PropTypes.array,
 }
 
 export default MoviesPresenter
