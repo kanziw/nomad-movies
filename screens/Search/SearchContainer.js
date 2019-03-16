@@ -1,4 +1,5 @@
 import React from 'react'
+import { getResults, movies, tv } from '../../api'
 import SearchPresenter from './SearchPresenter'
 
 export default class extends React.Component {
@@ -7,6 +8,7 @@ export default class extends React.Component {
     movieResults: null,
     tvResults: null,
     searchTerm: '',
+    error: null,
   }
 
   handleSearchUpdate = text => {
@@ -15,11 +17,28 @@ export default class extends React.Component {
     })
   }
 
-  onSubmitEditing = () => {
+  onSubmitEditing = async () => {
     const { searchTerm } = this.state
     if (searchTerm !== '') {
-      alert('Searching')
-      return
+      let movieResults, tvResults, error
+      this.setState({
+        loading: true,
+      })
+      try {
+        [ movieResults, tvResults ] = await Promise.all([
+          movies.searchMovies(searchTerm),
+          tv.searchTv(searchTerm),
+        ]).then(results => results.map(getResults))
+      } catch {
+        error = 'Can\'t search'
+      } finally {
+        this.setState({
+          loading: false,
+          movieResults,
+          tvResults,
+          error,
+        })
+      }
     }
   }
 
