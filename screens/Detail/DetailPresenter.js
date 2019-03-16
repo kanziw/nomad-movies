@@ -72,6 +72,14 @@ const Genres = styled.Text`
   width: 95%;
 `
 
+const ContentData = ({ title, data }) => data
+  ? (
+    <DataContainer>
+      <ContentTitle>{title}</ContentTitle>
+      <ContentValue>{data}</ContentValue>
+    </DataContainer>
+  ) : null
+
 const DetailPresenter = (
   {
     posterPhoto,
@@ -114,26 +122,12 @@ const DetailPresenter = (
       </LinearGradient>
     </Header>
     <MainContent>
-      {overview ? (
-        <DataContainer>
-          <ContentTitle>Overview</ContentTitle>
-          <ContentValue>{overview}</ContentValue>
-        </DataContainer>
-      ) : null}
-      {status ? (
-        <DataContainer>
-          <ContentTitle>Status</ContentTitle>
-          <ContentValue>{status}</ContentValue>
-        </DataContainer>
-      ) : null}
-      {date ? (
-        <DataContainer>
-          <ContentTitle>
-            {isMovie ? 'Realease Date' : 'First Episode'}
-          </ContentTitle>
-          <ContentValue>{date}</ContentValue>
-        </DataContainer>
-      ) : null}
+      <ContentData title='Overview' data={overview} />
+      <ContentData title='Status' data={status} />
+      <ContentData
+        title={isMovie ? 'Realease Date' : 'First Episode'}
+        data={date}
+      />
       {loading ? <Loader /> : null}
     </MainContent>
   </Container>
