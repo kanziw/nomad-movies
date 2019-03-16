@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { TouchableWithoutFeedback } from 'react-native'
+import { withNavigation } from 'react-navigation'
 import styled from 'styled-components'
 import { GREY_COLOR } from '../constants/Colors'
 import MoviePoster from './MoviePoster'
@@ -40,32 +42,41 @@ const MovieItem = (
     voteAvg,
     horizontal = false,
     overview,
+    isMovie = true,
+    navigation,
   },
-) =>
-  horizontal ? (
-    <HContainer>
-      <MoviePoster path={posterPhoto} />
-      <Column>
-        <Title big={true}>{title}</Title>
+) => (
+  <TouchableWithoutFeedback
+    onPress={() =>
+      navigation.navigate({ routeName: 'Detail', params: { isMovie, id } })
+    }
+  >
+    {horizontal ? (
+      <HContainer>
+        <MoviePoster path={posterPhoto} />
+        <Column>
+          <Title big={true}>{title}</Title>
+          <MovieRating votes={voteAvg} />
+          {overview ? (
+            <Overview>
+              {overview.length > 150
+                ? `${overview.substring(0, 147)}...`
+                : overview}
+            </Overview>
+          ) : null}
+        </Column>
+      </HContainer>
+    ) : (
+      <Container>
+        <MoviePoster path={posterPhoto} />
+        <Title>
+          {title.length > 15 ? `${title.substring(0, 12)}...` : title}
+        </Title>
         <MovieRating votes={voteAvg} />
-        {overview ? (
-          <Overview>
-            {overview.length > 150
-              ? `${overview.substring(0, 147)}...`
-              : overview}
-          </Overview>
-        ) : null}
-      </Column>
-    </HContainer>
-  ) : (
-    <Container>
-      <MoviePoster path={posterPhoto} />
-      <Title>
-        {title.length > 15 ? `${title.substring(0, 12)}...` : title}
-      </Title>
-      <MovieRating votes={voteAvg} />
-    </Container>
-  )
+      </Container>
+    )}
+  </TouchableWithoutFeedback>
+)
 
 MovieItem.propTypes = {
   id: PropTypes.number.isRequired,
@@ -73,6 +84,7 @@ MovieItem.propTypes = {
   title: PropTypes.string.isRequired,
   voteAvg: PropTypes.number.isRequired,
   overview: PropTypes.string,
+  isMovie: PropTypes.bool,
 }
 
-export default MovieItem
+export default withNavigation(MovieItem)

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { withNavigation } from 'react-navigation'
 import styled from 'styled-components'
 import MovieRating from '../components/MovieRating'
 import { TINT_COLOR } from '../constants/Colors'
@@ -67,6 +68,7 @@ const MovieSlide = (
     title,
     voteAvg,
     overview,
+    navigation,
   },
 ) => (
   <Container>
@@ -87,7 +89,14 @@ const MovieSlide = (
               : overview}
           </Overview>
         ) : null}
-        <BtnContainer>
+        <BtnContainer
+          onPress={() =>
+            navigation.navigate({
+              routeName: 'Detail',
+              params: { isMovie: true, id },
+            })
+          }
+        >
           <BtnText>More details</BtnText>
         </BtnContainer>
       </Column>
@@ -104,4 +113,4 @@ MovieSlide.propTypes = {
   overview: PropTypes.string.isRequired,
 }
 
-export default MovieSlide
+export default withNavigation(MovieSlide)

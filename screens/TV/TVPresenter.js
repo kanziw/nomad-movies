@@ -20,6 +20,7 @@ const TVPresenter = ({ loading, airingToday, airingThisWeek, popular }) => loadi
             .filter(tv => tv.poster_path !== null)
             .map(tv => (
               <MovieItem
+                isMovie={false}
                 key={tv.id}
                 id={tv.id}
                 posterPhoto={tv.poster_path}
@@ -30,11 +31,12 @@ const TVPresenter = ({ loading, airingToday, airingThisWeek, popular }) => loadi
         </Section>
       ) : null}
       {airingThisWeek ? (
-        <Section title="Top Rated">
+        <Section title="Airing this Week">
           {airingThisWeek
             .filter(tv => tv.poster_path !== null)
             .map(tv => (
               <MovieItem
+                isMovie={false}
                 key={tv.id}
                 id={tv.id}
                 posterPhoto={tv.poster_path}
@@ -45,13 +47,16 @@ const TVPresenter = ({ loading, airingToday, airingThisWeek, popular }) => loadi
         </Section>
       ) : null}
       {popular ? (
-        <Section title="Top Rated">
+        <Section title="Popular" horizontal={false}>
           {popular
             .filter(tv => tv.poster_path !== null)
             .map(tv => (
               <MovieItem
+                isMovie={false}
+                horizontal={true}
                 key={tv.id}
                 id={tv.id}
+                overview={tv.overview}
                 posterPhoto={tv.poster_path}
                 title={tv.name}
                 voteAvg={tv.vote_average}
