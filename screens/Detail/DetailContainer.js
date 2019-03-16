@@ -1,4 +1,5 @@
 import React from 'react'
+import { movies, tv } from '../../api'
 import DetailPresenter from './DetailPresenter'
 
 export default class extends React.Component {
@@ -14,12 +15,46 @@ export default class extends React.Component {
   }
 
   async componentDidMount() {
+    const { isMovie, id } = this.state
+    let genres, overview, status, date, backgroundPhoto, name
     try {
-    } catch {
+      if (isMovie) {
+        ({
+          data: {
+            genres,
+            overview,
+            status,
+            release_date: date,
+            backdrop_path: backgroundPhoto,
+          },
+        } = await movies.getMovie(id))
+      } else {
+        ({
+          data: {
+            genres,
+            overview,
+            status,
+            first_air_date: date,
+            title: name,
+            backdrop_path: backgroundPhoto,
+          },
+        } = await tv.getShow(id))
+      }
+    } catch (error) {
+      console.log(error)
     } finally {
-      this.setState({ loading: false })
+      this.setState({
+        loading: false, genres,
+        backgroundPhoto,
+        overview,
+        status,
+        date,
+        name,
+      })
     }
   }
 
-  render = () => <DetailPresenter {...this.state} />
+  render() {
+    return <DetailPresenter {...this.state} />
+  }
 }
