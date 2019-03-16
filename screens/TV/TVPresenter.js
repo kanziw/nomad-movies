@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Loader from '../../components/Loader'
 import MovieItem from '../../components/MovieItem'
 import Section from '../../components/Section'
-import { BG_COLOR } from '../../constants/Color'
+import { BG_COLOR } from '../../constants/Colors'
 
 const Container = styled.ScrollView`
   background-color: ${BG_COLOR};

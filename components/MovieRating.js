@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
-import { GREY_COLOR, TINT_COLOR } from '../constants/Color'
+import { GREY_COLOR, TINT_COLOR } from '../constants/Colors'
 
 const Vote = styled.Text`
   color: ${props => props.inSlide ? TINT_COLOR : GREY_COLOR};

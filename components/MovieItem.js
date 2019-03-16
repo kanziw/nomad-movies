@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
+import { GREY_COLOR } from '../constants/Colors'
 import MoviePoster from './MoviePoster'
 import MovieRating from './MovieRating'
 
@@ -11,12 +12,52 @@ const Container = styled.View`
 
 const Title = styled.Text`
   color: white;
-  font-size: 12px;
+  font-size: ${props => (!props.big ? 12 : 14)}px;
   margin-vertical: 5px;
 `
 
-const MovieItem = ({ id, posterPhoto, title, voteAvg, horizontal = false }) =>
-  horizontal ? null : (
+const HContainer = styled.View`
+  margin-bottom: 20px;
+  flex-direction: row;
+`
+
+const Column = styled.View`
+  margin-left: 20px;
+  width: 60%;
+`
+
+const Overview = styled.Text`
+  color: ${GREY_COLOR};
+  font-size: 12px;
+  margin-vertical: 10px;
+`
+
+const MovieItem = (
+  {
+    id,
+    posterPhoto,
+    title,
+    voteAvg,
+    horizontal = false,
+    overview,
+  },
+) =>
+  horizontal ? (
+    <HContainer>
+      <MoviePoster path={posterPhoto} />
+      <Column>
+        <Title big={true}>{title}</Title>
+        <MovieRating votes={voteAvg} />
+        {overview ? (
+          <Overview>
+            {overview.length > 150
+              ? `${overview.substring(0, 147)}...`
+              : overview}
+          </Overview>
+        ) : null}
+      </Column>
+    </HContainer>
+  ) : (
     <Container>
       <MoviePoster path={posterPhoto} />
       <Title>
@@ -31,6 +72,7 @@ MovieItem.propTypes = {
   posterPhoto: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   voteAvg: PropTypes.number.isRequired,
+  overview: PropTypes.string,
 }
 
 export default MovieItem
